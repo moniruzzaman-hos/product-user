@@ -1,5 +1,6 @@
 "use client";
 
+import CommonHeader from "@/components/Shared/CommonHeader";
 import GuardHoc from "@/components/Shared/GuardHoc";
 import { product } from "@/public/product";
 
@@ -116,9 +117,7 @@ function Product({ authStore }) {
   return (
     <div>
       <title>Product - User & Product</title>
-      <h1 className="text-4xl font-bold text-center">
-        Welcome to User & Product Product Page
-      </h1>
+      <CommonHeader />
       <div className="grid grid-cols-1 gap-4 tbd:grid-cols-2 mmd:grid-cols-3 mt-10 xl:grid-cols-4">
         {products.map((data, index) => {
           const id = get(data, "id", "");

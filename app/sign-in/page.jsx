@@ -6,10 +6,11 @@ import OverallError from "@/components/Inputs/OverallError";
 import PasswordInput from "@/components/Inputs/PasswordInput";
 import SubmitButton from "@/components/Inputs/SubmitButton";
 import TextInput from "@/components/Inputs/TextInput";
+import Modal from "@/components/Modal/Modal";
 import NotAuthenticated from "@/components/Shared/NotAuthenticated";
 import { toastSuccess } from "@/components/Shared/ToastHelpers";
 import { userInfo } from "@/public/userInfo";
-import { get } from "lodash";
+import { get, set } from "lodash";
 import { inject, observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -26,6 +27,15 @@ function SignInPage({ authStore }) {
     overall: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(true);
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
 
   const router = useRouter();
 
@@ -77,6 +87,28 @@ function SignInPage({ authStore }) {
   return (
     <NotAuthenticated>
       <title>Sign In - User & Product</title>
+      <Modal title="Login Credentials" isOpen={open} onClose={onClose}>
+        <div>
+          <h2 className="text-xl font-semibold text-center"> User</h2>
+          <p>
+            <span className="text-xl font-semibold">Email: </span>
+            monir@gmail.com
+          </p>
+          <p>
+            <span className="text-xl font-semibold">Password: </span>123456
+          </p>
+          <h2 className="text-xl font-semibold text-center border-top">
+            Admin
+          </h2>
+          <p>
+            <span className="text-xl font-semibold">Email: </span>
+            bappy@gmail.com
+          </p>
+          <p>
+            <span className="text-xl font-semibold">Password: </span>123abc
+          </p>
+        </div>
+      </Modal>
       <div className="flex justify-center items-center h-[90vh] ">
         <div className="md:w-[450px] bg-white p-4 rounded-lg">
           <h1 className="text-center text-2xl font-bold mb-2 uppercase">
